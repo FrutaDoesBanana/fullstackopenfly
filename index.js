@@ -31,6 +31,7 @@ let phonebook = [
     }
 ]
 
+app.use(express.static('dist'))
 
 app.use(cors())
     morgan.token('id', function getId(req) {
@@ -46,11 +47,12 @@ app.use(cors())
         next()
     }    
     app.use(assignId)
-    app.use(morgan(':method :url :status: :id', {stream: {write: printToConsole}}))
+    app.use(morgan('common', {stream: {write: printToConsole}}))
     
     
     
     app.get('/', (request, response )=> {
+        console.log('ola')
     response.send('hola')
 })
 
@@ -112,4 +114,3 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
-console.log(`${baseUrl}`)
