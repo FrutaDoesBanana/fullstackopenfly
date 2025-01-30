@@ -22,3 +22,7 @@ primary_region = 'qro'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[[statics]]
+  guest_path = "/app/dist"
+  url_prefix = "/"

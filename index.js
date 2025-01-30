@@ -1,9 +1,9 @@
 const express = require('express')
 const morgan =  require('morgan')
+const cors =    require('cors')
 const path =    require('path')
 const fs =      require('fs')
 const uuid =    require('uuid')
-const cors =    require('cors')
 const app =     express()
 const baseUrl = 'http://localhost:3001/'
 
@@ -31,9 +31,11 @@ let phonebook = [
     }
 ]
 
-app.use(express.static('dist'))
+app.use('/static', express.static(path.join(__dirname, 'dist')))
 
 app.use(cors())
+
+
     morgan.token('id', function getId(req) {
         return req.id
     })
@@ -57,9 +59,9 @@ app.use(cors())
 })
 
 app
-.delete('/api/notes/:id', (request, response) => {
+.delete('/api/phonebook/:id', (request, response) => {
     const id = request.params.id
-    notes = notes.filter(note => note.id !== id)
+    phonebook = phonebook.filter(note => note.id !== id)
     response.status(204).end()
 })
 
